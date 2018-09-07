@@ -8,7 +8,7 @@ This script is specifically taylored to assist with the O365 Worldwide IP space 
 # Example: settings.json
 
 **Note**:
-When modifying the .json settings file, you cannot use comments of any kind.  Hence the example file below is only a reference and cannot be used directly.
+When modifying the .json settings file, you cannot use comments of any kind.  Hence, the example file below is only a reference and cannot be used directly.
 
 ```js
 
