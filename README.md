@@ -57,9 +57,7 @@ When modifying the .json settings file, you cannot use comments of any kind.  He
     "CRLs",
     "OfficeiPad",
     "EOP"
-  ],
-  
-  "state": "TEMPLATE", //Do NOT remove this line.  It's required for .json template files such as this.
+  ]
 }
 ```
 Go break stuff. Enjoy!
