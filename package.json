@@ -1,0 +1,16 @@
+{
+  "name": "f5O365SplitTunnelUpdateScript",
+  "description": "Creates a list of Networks for split tunneling",
+  "memory": 128,
+  "timeout": 5,
+  "environment": {},
+  "profile": "default",
+  "dependencies": {
+    "array-includes": "^3.0.3",
+    "array-unique": "^0.3.2",
+    "cidr-clean": "^1.1.1",
+    "node-rest-client": "^3.1.0",
+    "node-rest-client-promise": "^3.0.0",
+    "q": "^1.5.1"
+  }
+}
