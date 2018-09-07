@@ -1,6 +1,6 @@
 # f5O365SplitTunnelUpdateScript.js
 
-This script is designed to automatically update the Network Access Policy on a F5 BigIP and subsequently apply the policy after the updates have been made.
+This script is designed to automatically update the network access profile on a F5 BigIP and subsequently apply the related access policy after the updates have been made.
 
 This script is specifically taylored to assist with the O365 Worldwide IP space published by Microsoft in their XML file.  It currenlty only supports IPv4.  Eventually, IPv6. Maybe.
 
