@@ -10,7 +10,7 @@ This script is specifically taylored to assist with the O365 Worldwide IP space 
 **Note**:
 When modifying the .json settings file, you cannot use comments of any kind.  Hence the example file below is only a reference and cannot be used directly.
 
-```json
+```js
 
 {
   "name": "splittuneel-settings",
