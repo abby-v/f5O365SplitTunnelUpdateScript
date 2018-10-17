@@ -1,6 +1,7 @@
 "use strict";
 var Client = require('node-rest-client').Client;
 var uuidv1 = require('uuid/v1');
+var cidrClean = require('cidr-clean');
 
 var settings = require('./settings.json');
 
@@ -15,14 +16,21 @@ var url = settings.o365addressURL + uuidv1() + "&NoIPV6";
 //Call-out to Microsoft and retrieve the O365 JSON
 client.get(url, function (data, response) {
   var newlist = [];
+  var addresslist = [];
+  var addresses = [];
 
   //first foreach drops to element level, we will look for IP block next.
   data.forEach(element => {
     for(var ip in element.ips){
-      //push to stack
-      newlist.push({'subnet': element.ips[ip]});
+        addresslist.push(element.ips[ip]);
     }
   });
+    var newlist = cidrClean(addresslist);
+      //push to stack
+      newlist.forEach(function(value) {
+        var tempobj = {'subnet': value};
+        addresses.push(tempobj);
+      });
 
   if (newlist.length) {
     /*Specify which list will be updated in the Network Access policy - addressSpaceExcludeSubnet
