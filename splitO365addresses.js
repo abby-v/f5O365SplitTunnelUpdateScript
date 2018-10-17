@@ -13,7 +13,7 @@ var options = {
 var client = new Client(options);
 var url = settings.o365addressURL + uuidv1() + "&NoIPV6";
 
-//Call-out to Microsoft and retrieve the O365 XML
+//Call-out to Microsoft and retrieve the O365 JSON
 client.get(url, function (data, response) {
   var newlist = [];
 
