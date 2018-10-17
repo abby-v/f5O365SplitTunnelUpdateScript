@@ -5,25 +5,5 @@
   "ipAddressOfBigIP": "10.10.10.10",
   "userName": "admin",
   "password": "admin",
-  "o365addressURL": "https://support.content.office.net/en-us/static/O365IPAddresses.xml",
-  "msProducts": ["o365",
-    "LYO",
-    "Planner",
-    "Teams",
-    "ProPlus",
-    "OneNote",
-    "Yammer",
-    "EXO",
-    "Identity",
-    "Office365Video",
-    "WAC",
-    "SPO",
-    "RCA",
-    "Sway",
-    "EX-Fed",
-    "OfficeMobile",
-    "CRLs",
-    "OfficeiPad",
-    "EOP"
-  ]
+  "o365addressURL": "https://endpoints.office.com/endpoints/worldwide?clientrequestid="
 }

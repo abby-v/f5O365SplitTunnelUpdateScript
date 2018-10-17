@@ -2,7 +2,7 @@
 
 This script is designed to automatically update the network access profile on a F5 BigIP and subsequently apply the related access policy after the updates have been made.
 
-This script is specifically taylored to assist with the O365 Worldwide IP space published by Microsoft in their XML file.  It currenlty only supports IPv4.  Eventually, IPv6. Maybe.
+This script is specifically taylored to assist with the O365 Worldwide IP space published by Microsoft in their REST API.  It currenlty only supports IPv4.  Eventually, IPv6. Maybe.
 
 
 # Example: settings.json
@@ -29,35 +29,11 @@ When modifying the .json settings file, you cannot use comments of any kind.  He
   "password": "admin",
   
   /*URL of the Microsoft published O365 list. More info here: 
-  https://docs.microsoft.com/en-us/office365/enterprise/urls-and-ip-address-ranges
+  This URL gets a uuid appended, in addition to &NoIPV6 to filter out all IPv6 responses from the JSON.
+  https://docs.microsoft.com/en-us/office365/enterprise/office-365-ip-web-service
   */
-  "o365addressURL": "https://support.content.office.net/en-us/static/O365IPAddresses.xml",
+  "o365addressURL": "https://endpoints.office.com/endpoints/worldwide?clientrequestid=",
   
-  /*Specific products can be configured to shorten the ammount of IP addressed in the Network Access profile
-  Having many hundred IP address in the profile can start to slow-down the Edge client connection initiation time.
-  For each 500 IP addresses, the connection initiation time slows down by ~2 seconds while the endpoint
-  applies the additional routes into the routing table. The delay is host dependent.  Fewer products = fewer IPs = 
-  fewer routes = faster connection iniation.  We are currently targeting ALL applications, however.*/
-  "msProducts": ["o365",
-    "LYO",
-    "Planner",
-    "Teams",
-    "ProPlus",
-    "OneNote",
-    "Yammer",
-    "EXO",
-    "Identity",
-    "Office365Video",
-    "WAC",
-    "SPO",
-    "RCA",
-    "Sway",
-    "EX-Fed",
-    "OfficeMobile",
-    "CRLs",
-    "OfficeiPad",
-    "EOP"
-  ]
 }
 ```
 Go break stuff. Enjoy!
