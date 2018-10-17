@@ -1,7 +1,7 @@
 {
   "name": "splittuneel-settings",
-  "networkAccessObject": "~Common~vpn_na",
-  "accessPolicyObject": "~Common~vpn_ap",
+  "networkAccessObject": "~Common~network_acess_na",
+  "accessPolicyObject": "~Common~access_policy_ap",
   "ipAddressOfBigIP": "10.10.10.10",
   "userName": "admin",
   "password": "admin",

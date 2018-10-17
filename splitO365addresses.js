@@ -19,14 +19,15 @@ client.get(url, function (data, response) {
   var addresslist = [];
   var addresses = [];
 
-  //first foreach drops to element level, we will look for IP block next.
+  //First foreach drops to element level, we will look for IP block next.
   data.forEach(element => {
     for(var ip in element.ips){
         addresslist.push(element.ips[ip]);
     }
   });
+    //Clean-up the IP list.  F5 APM does not allow overlapping networks.
     var newlist = cidrClean(addresslist);
-      //push to stack
+      //Add the string 'subnet' as the key to the value pair in the array.
       newlist.forEach(function(value) {
         var tempobj = {'subnet': value};
         addresses.push(tempobj);
