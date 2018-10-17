@@ -1,5 +1,4 @@
 "use strict";
-
 var Client = require('node-rest-client').Client;
 var uuidv1 = require('uuid/v1');
 
