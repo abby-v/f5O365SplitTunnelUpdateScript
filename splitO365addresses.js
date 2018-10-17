@@ -36,7 +36,7 @@ client.get(url, function (data, response) {
     /*Specify which list will be updated in the Network Access policy - addressSpaceExcludeSubnet
     Anything in this list will NOT be forced through the VPN tunnel and will be split-tunneled
     Out to the internet directly from the client's machine*/
-    var body = {'addressSpaceExcludeSubnet': newlist};
+    var body = {'addressSpaceExcludeSubnet': addresses};
     var client = new Client(options_auth);
     //Values for the Network Access Profile update
     var args_na = {
