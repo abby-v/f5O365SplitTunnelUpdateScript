@@ -1,50 +1,35 @@
 "use strict";
 
 var Client = require('node-rest-client').Client;
-var includes = require('array-includes');
-var cidrClean = require('cidr-clean');
+var uuidv1 = require('uuid/v1');
 
 var settings = require('./settings.json');
 
 var options = {
   mimetypes: {
-      xml: ["application/xml"]
+      xml: ["application/json"]
     }
 };
 var client = new Client(options);
-client.parsers.find("XML").options= {"mergeAttrs": true};
+var url = settings.o365addressURL + uuidv1() + "&NoIPV6";
 
 //Call-out to Microsoft and retrieve the O365 XML
-client.get(settings.o365addressURL, function (data, response) {
+client.get(url, function (data, response) {
   var newlist = [];
-  for(var i = 0; i < data.products.product.length; i++)
-  {
-    if(includes(settings.msProducts, data.products.product[i].name[0])) {
-      for(var ii = 0; ii < data.products.product[i].addresslist.length; ii++) {
-        //Collect only the IPv4 addresses for the specified products in the settings
-        if(data.products.product[i].addresslist[ii].type[0] == 'IPv4') {
-          if ( typeof data.products.product[i].addresslist[ii].address !== 'undefined' && data.products.product[i].addresslist[ii].address ) {
-            var addresslist = data.products.product[i].addresslist[ii].address
-            addresslist.forEach(function(value) {
-              newlist.push(value);
-            });
-          }
-        }
-      }
+
+  //first foreach drops to element level, we will look for IP block next.
+  data.forEach(element => {
+    for(var ip in element.ips){
+      //push to stack
+      newlist.push({'subnet': element.ips[ip]});
     }
-  }
-  //Clean-up the IPv4 addresses - Remove duplicates and supernet matching subnets
+  });
+
   if (newlist.length) {
-    var newlist = cidrClean(newlist);
-    var addresses = [];
-    newlist.forEach(function(value) {
-      var tempobj = {'subnet': value};
-      addresses.push(tempobj);
-    });
     /*Specify which list will be updated in the Network Access policy - addressSpaceExcludeSubnet
     Anything in this list will NOT be forced through the VPN tunnel and will be split-tunneled
     Out to the internet directly from the client's machine*/
-    var body = {'addressSpaceExcludeSubnet': addresses};
+    var body = {'addressSpaceExcludeSubnet': newlist};
     var client = new Client(options_auth);
     //Values for the Network Access Profile update
     var args_na = {
